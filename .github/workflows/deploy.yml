@@ -1,7 +1,9 @@
-
 name: Build and Update HTML branch
 on:
   push:
+    branches:
+      - main
+  pull_request:
     branches:
       - main
   workflow_dispatch:
@@ -16,20 +18,16 @@ jobs:
         with:
           node-version: '12.x'
 
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-
       - name: Cache dependencies
         uses: actions/cache@v2
         with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
-            ${{ runner.os }}-yarn-
-      - run: npm install
+            ${{ runner.os }}-node-
       - run: npm ci
-      - run: npm build
+      - run: npm run update:store
+      - run: npm run build
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
