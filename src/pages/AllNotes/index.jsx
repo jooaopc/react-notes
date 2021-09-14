@@ -20,8 +20,12 @@ function AllNotes() {
     localStorage.setItem("notas", JSON.stringify(notes));
   }, [notes]);
 
+  // eslint-disable-next-line
+  const temNotas = notes == ''
+
   return (
     <Container>
+      {temNotas && <p className="mt-2 p-4 card-title h4 d-flex justify-content-center" bg="light">Não foram encontradas notas, adicione alguma!</p>}
       {notes.map((data, index) => (
         <CardUI
           key={index}

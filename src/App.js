@@ -4,6 +4,7 @@ import NewNote from "./pages/NewNote";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Nav } from "react-bootstrap";
 import { Fragment } from "react";
+import NoteDetail from "./pages/NoteDetail";
 
 function App() {
   return (
@@ -35,6 +36,9 @@ function App() {
         </Route>
         <Route path="/new">
           <NewNote />
+        </Route>
+        <Route path="/detail/:id">
+          <NoteDetail />
         </Route>
         <Route path="*">404: Page not Found.</Route>
       </Switch>
