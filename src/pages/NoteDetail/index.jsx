@@ -41,7 +41,6 @@ function NoteDetail() {
     
   return (
     <Container>
-      {(texto || titulo) &&
     <Form onSubmit={handleForm}>
       <Card className="p-2 m-2" bg="light">
         <Form.Group controlId="title">
@@ -66,7 +65,6 @@ function NoteDetail() {
         </Button>
       </div>
     </Form>
-      }
       </Container>
   );
 }
