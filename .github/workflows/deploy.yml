@@ -2,10 +2,7 @@ name: Build and Update HTML branch
 on:
   push:
     branches:
-      - main
-  pull_request:
-    branches:
-      - main
+      - master
   workflow_dispatch:
 jobs:
   build:

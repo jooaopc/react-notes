@@ -1,23 +1,38 @@
 import { Button, Card } from "react-bootstrap";
-import { BsTrashFill } from "react-icons/bs";
+import { BsTrashFill, BsFillGearFill } from "react-icons/bs";
 
-function CardUI(props) {
-  const deletar = props.onClick;
-
+function CardUI({onDelete, id, text, title, onModifica}) {
   return (
     <Card className="mt-2 p-2" bg="light">
       <Card.Title className="justify-content-between d-flex">
-        {props.title}
+        <div className='mt-3 ms-3'>{title}</div>
+        <div>
         <Button
           type="button"
-          variant="light"
-          className="p-0"
-          onClick={() => deletar(props.id)}
+          variant="outline-dark"
+          className="p-2 m-1"
+          onClick={() => {
+            const confirmBox = window.confirm(
+              "Deseja mesmo deletar?"
+            )
+            if (confirmBox === true) {
+              onDelete(id)
+            }
+          }}
         >
           <BsTrashFill />
         </Button>
+        <Button
+          type="button"
+          variant="outline-dark"
+          className="p-2 m-1"
+          onClick={() => onModifica(id)}
+        >
+          <BsFillGearFill />
+        </Button>
+        </div>
       </Card.Title>
-      <Card.Body>{props.text}</Card.Body>
+      <Card.Body>{text}</Card.Body>
     </Card>
   );
 }
